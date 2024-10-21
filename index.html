@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library Management System Java Code</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        pre {
+            background-color: #1e1e1e;
+            color: #dcdcdc;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+        }
+
+        /* Style for Java keywords */
+        .keyword {
+            color: #569cd6;
+            font-weight: bold;
+        }
+
+        /* Style for strings */
+        .string {
+            color: #ce9178;
+        }
+
+        /* Style for comments */
+        .comment {
+            color: #6a9955;
+        }
+
+        /* Style for class names */
+        .classname {
+            color: #4ec9b0;
+        }
+
+        /* Style for methods */
+        .method {
+            color: #dcdcaa;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Library Management System - Java Code</h1>
+
+<pre>
+<span class="comment">// Book class to hold book information</span>
+<span class="keyword">class</span> <span class="classname">Book</span> {
+    <span class="keyword">private</span> <span class="keyword">String</span> title;
+    <span class="keyword">private</span> <span class="keyword">String</span> author;
+    <span class="keyword">private</span> <span class="keyword">String</span> isbn;
+
+    <span class="keyword">public</span> <span class="classname">Book</span>(<span class="keyword">String</span> title, <span class="keyword">String</span> author, <span class="keyword">String</span> isbn) {
+        <span class="keyword">this</span>.title = title;
+        <span class="keyword">this</span>.author = author;
+        <span class="keyword">this</span>.isbn = isbn;
+    }
+
+    <span class="keyword">public</span> <span class="keyword">String</span> getTitle() {
+        <span class="keyword">return</span> title;
+    }
+
+    <span class="keyword">public</span> <span class="keyword">String</span> getAuthor() {
+        <span class="keyword">return</span> author;
+    }
+
+    <span class="keyword">public</span> <span class="keyword">String</span> getIsbn() {
+        <span class="keyword">return</span> isbn;
+    }
+
+    @Override
+    <span class="keyword">public</span> <span class="keyword">String</span> toString() {
+        <span class="keyword">return</span> <span class="string">"Title: "</span> + title + <span class="string">", Author: "</span> + author + <span class="string">", ISBN: "</span> + isbn;
+    }
+}
+
+<span class="comment">// Library class to manage books</span>
+<span class="keyword">class</span> <span class="classname">Library</span> {
+    <span class="keyword">private</span> <span class="keyword">List</span>&lt;<span class="classname">Book</span>&gt; books;
+
+    <span class="keyword">public</span> <span class="classname">Library</span>() {
+        books = <span class="keyword">new</span> <span class="classname">ArrayList</span>&lt;&gt;();
+    }
+
+    <span class="keyword">public</span> <span class="keyword">void</span> addBook(<span class="classname">Book</span> book) {
+        books.add(book);
+        <span class="method">System</span>.out.println(<span class="string">"Book added successfully."</span>);
+    }
+
+    <span class="keyword">public</span> <span class="keyword">void</span> viewBooks() {
+        <span class="keyword">if</span> (books.isEmpty()) {
+            <span class="method">System</span>.out.println(<span class="string">"No books in the library."</span>);
+        } <span class="keyword">else</span> {
+            <span class="keyword">for</span> (<span class="classname">Book</span> book : books) {
+                <span class="method">System</span>.out.println(book);
+            }
+        }
+    }
+
+    <span class="keyword">public</span> <span class="keyword">void</span> searchBookByTitle(<span class="keyword">String</span> title) {
+        <span class="keyword">boolean</span> found = <span class="keyword">false</span>;
+        <span class="keyword">for</span> (<span class="classname">Book</span> book : books) {
+            <span class="keyword">if</span> (book.getTitle().equalsIgnoreCase(title)) {
+                <span class="method">System</span>.out.println(book);
+                found = <span class="keyword">true</span>;
+            }
+        }
+        <span class="keyword">if</span> (!found) {
+            <span class="method">System</span>.out.println(<span class="string">"Book not found."</span>);
+        }
+    }
+
+    <span class="keyword">public</span> <span class="keyword">void</span> searchBookByAuthor(<span class="keyword">String</span> author) {
+        <span class="keyword">boolean</span> found = <span class="keyword">false</span>;
+        <span class="keyword">for</span> (<span class="classname">Book</span> book : books) {
+            <span class="keyword">if</span> (book.getAuthor().equalsIgnoreCase(author)) {
+                <span class="method">System</span>.out.println(book);
+                found = <span class="keyword">true</span>;
+            }
+        }
+        <span class="keyword">if</span> (!found) {
+            <span class="method">System</span>.out.println(<span class="string">"Book not found."</span>);
+        }
+    }
+}
+
+<span class="comment">// Main class to run the library system</span>
+<span class="keyword">public</span> <span class="keyword">class</span> <span class="classname">LibraryManagementSystem</span> {
+    <span class="keyword">private static</span> <span class="classname">Scanner</span> scanner = <span class="keyword">new</span> <span class="classname">Scanner</span>(<span class="keyword">System</span>.in);
+    <span class="keyword">private static</span> <span class="classname">Library</span> library = <span class="keyword">new</span> <span class="classname">Library</span>();
+
+    <span class="keyword">public static void</span> main(<span class="keyword">String</span>[] args) {
+        <span class="keyword">while</span> (<span class="keyword">true</span>) {
+            <span class="method">System</span>.out.println(<span class="string">"\nLibrary Management System"</span>);
+            <span class="method">System</span>.out.println(<span class="string">"1. Add Book"</span>);
+            <span class="method">System</span>.out.println(<span class="string">"2. View Books"</span>);
+            <span class="method">System</span>.out.println(<span class="string">"3. Search Book by Title"</span>);
+            <span class="method">System</span>.out.println(<span class="string">"4. Search Book by Author"</span>);
+            <span class="method">System</span>.out.println(<span class="string">"5. Exit"</span>);
+            <span class="method">System</span>.out.print(<span class="string">"Enter your choice: "</span>);
+
+            <span class="keyword">int</span> choice = scanner.nextInt();
+            scanner.nextLine();  <span class="comment">// Consume newline</span>
+
+            <span class="keyword">switch</span> (choice) {
+                <span class="keyword">case</span> 1:
+                    addBook();
+                    <span class="keyword">break</span>;
+                <span class="keyword">case</span> 2:
+                    library.viewBooks();
+                    <span class="keyword">break</span>;
+                <span class="keyword">case</span> 3:
+                    searchBookByTitle();
+                    <span class="keyword">break</span>;
+                <span class="keyword">case</span> 4:
+                    searchBookByAuthor();
+                    <span class="keyword">break</span>;
+                <span class="keyword">case</span> 5:
+                    <span class="method">System</span>.out.println(<span class="string">"Exiting the system."</span>);
+                    <span class="keyword">System</span>.exit(0);
+                    <span class="keyword">break</span>;
+                <span class="keyword">default</span>:
+                    <span class="method">System</span>.out.println(<span class="string">"Invalid choice. Please try again."</span>);
+            }
+        }
+    }
+
+    <span class="keyword">private static void</span> addBook() {
+        <span class="method">System</span>.out.print(<span class="string">"Enter book title: "</span>);
+        <span class="keyword">String</span> title = scanner.nextLine();
+        <span class="method">System</span>.out.print(<span class="string">"Enter book author: "</span>);
+        <span class="keyword">String</span> author = scanner.nextLine();
+        <span class="method">System</span>.out.print(<span class="string">"Enter book ISBN: "</span>);
+        <span class="keyword">String</span> isbn = scanner.nextLine();
+
+        <span class="classname">Book</span> book = <span class="keyword">new</span> <span class="classname">Book</span>(title, author, isbn);
+        library.addBook(book);
+    }
+
+    <span class="keyword">private static void</span> searchBookByTitle() {
+        <span class="method">System</span>.out.print(<span class="string">"Enter book title to search: "</span>);
+        <span class="keyword">String</span> title = scanner.nextLine();
+        library.searchBookByTitle(title);
+    }
+
+    <span class="keyword">private static void</span> searchBookByAuthor() {
+        <span class="method">System</span>.out.print(<span class="string">"Enter author name to search: "</span>);
+        <span class="keyword">String</span> author = scanner.nextLine();
+        library.searchBookByAuthor(author);
+    }
+}
+</pre>
+
+</body>
+</html>
